@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ITZ NotíciaZ</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="app.js" defer></script>
+    <script src="https://kit.fontawesome.com/9a1a3661f4.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <nav class="navbar">
+        <a href="index.html"><img class="logo" src="imagens/logo.png" alt="logo"></a>
+        <ul class="menu">
+            <li><a href="#">Política</a></li>
+            <li><a href="#">Esportes</a></li>
+            <li><a href="#">Economia</a></li>
+            <li><a href="#">Tecnologia</a></li>
+        </ul>
+        <div class="button">
+            <a href="login/login.html"><button class="login">Login</button></a>
+        </div>
+    </nav>
+
+    <!-- TESTE -->
+
+    <div class="slideshow-container">
+        <div class="mySlides">
+            <img class="slide-image" src="imagens/byd.webp">
+            <div class="text">Caption One</div>
+        </div>
+
+        <div class="mySlides">
+            <img class="slide-image" src="imagens/michelle-bolsonaro.png">
+            <div class="text">Caption Two</div>
+        </div>
+
+        <div class="mySlides">
+            <img class="slide-image" src="imagens/studio-ghibli.png">
+            <div class="text">Caption Three</div>
+        </div>
+
+        <a class="prev" onclick="plusSlides(-1)">❮</a>
+        <a class="next" onclick="plusSlides(1)">❯</a>
+
+    </div>
+    <br>
+
+    <div style="text-align:center">
+        <span class="dot" onclick="currentSlide(1)"></span>
+        <span class="dot" onclick="currentSlide(2)"></span>
+        <span class="dot" onclick="currentSlide(3)"></span>
+    </div>
+
+    <!-- FIM TESTE -->
+
+    <main>
+        <h1 class="destaques">Destaques</h1>
+
+        <ul class="lista-noticias" id="news-container">
+            <li>Carregando notícias...</li>
+        </ul>
+
+        <footer class="footer">
+            <div class="section-container">
+                <div class="section-container">
+                    <div class="redes-sociais-div">
+                        <span class="span-redes-sociais">Nossas redes sociais!</span>
+                        <ul class="redes-sociais">
+                            <li><a href="#"><i class="fa-brands fa-x-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+                            <li><a href="#"><i class="fa-brands fa-youtube"></i></a></li>
+                            <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
+                            <li><a href="#"><i class="fa-brands fa-tiktok"></i></a></li>
+                            <li><a href="#"><i class="fa-brands fa-telegram"></i></a></li>
+                            <li><a href="#"><i class="fa-brands fa-whatsapp"></i></a></li>
+                        </ul>
+                    </div>
+                    <span class="span-redes-sociais">Contato</span>
+                    <ul class="contato">
+                        <li><i class="fa-solid fa-envelope"><span>contato@itznoticiaz.com</span></i></li>
+                    </ul>
+                </div>
+            </div>
+        </footer>
+
+        <div id="copyright">
+            <p>©<span id="current-year"></span> - ITZ NotíciaZ. Todos os direitos reservados.</p>
+        </div>
+
+</body>
+
+</html>
