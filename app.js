@@ -119,11 +119,16 @@ const newsDatabase = [
   },
 ];
 
+// Variáveis do slideshow
+let slideIndex = 1;
+
+// Função principal quando o DOM é carregado
 document.addEventListener("DOMContentLoaded", function () {
   if (window.location.pathname.includes("detalhes.html")) {
     loadNewsDetails();
   } else {
     loadHomePage();
+    createSlides(); // Cria os slides dinamicamente
   }
   document.getElementById("current-year").textContent =
     new Date().getFullYear();
@@ -199,72 +204,78 @@ function formatDate(dateString) {
   return dateString;
 }
 
-// Carrosel
+// Função para criar os slides dinamicamente
+function createSlides() {
+  const slideshowContainer = document.getElementById('slideshow-container');
+  const dotsContainer = document.getElementById('dots-container');
+  
+  // Limpa qualquer conteúdo existente
+  slideshowContainer.innerHTML = '';
+  dotsContainer.innerHTML = '';
+  
+  // Seleciona as 3 primeiras notícias para os slides
+  const featuredNews = newsDatabase.slice(0, 3);
+  
+  // Cria os slides
+  featuredNews.forEach((news, index) => {
+    // Cria o slide
+    const slideDiv = document.createElement('div');
+    slideDiv.className = 'mySlides';
+    slideDiv.innerHTML = `
+      <img class="slide-image" src="${news.image}" alt="${news.title}">
+      <div class="text">
+        <h3>${news.title}</h3>
+        <p>${news.excerpt}</p>
+      </div>
+    `;
+    slideshowContainer.appendChild(slideDiv);
+    
+    // Cria os controles de navegação (prev/next) - apenas uma vez
+    if (index === 0) {
+      slideshowContainer.innerHTML += `
+        <a class="prev" onclick="plusSlides(-1)">❮</a>
+        <a class="next" onclick="plusSlides(1)">❯</a>
+      `;
+    }
+    
+    // Cria os dots
+    const dot = document.createElement('span');
+    dot.className = 'dot';
+    dot.onclick = function() { currentSlide(index + 1); };
+    dotsContainer.appendChild(dot);
+  });
+  
+  // Inicializa o slideshow
+  showSlides(slideIndex);
+}
 
-let slideIndex = 1;
-showSlides(slideIndex);
-
+// Funções do slideshow
 function plusSlides(n) {
-  showSlides((slideIndex += n));
+  showSlides(slideIndex += n);
 }
 
 function currentSlide(n) {
-  showSlides((slideIndex = n));
+  showSlides(slideIndex = n);
 }
 
 function showSlides(n) {
   let i;
   let slides = document.getElementsByClassName("mySlides");
   let dots = document.getElementsByClassName("dot");
-  if (n > slides.length) {
-    slideIndex = 1;
-  }
-  if (n < 1) {
-    slideIndex = slides.length;
-  }
+  
+  if (n > slides.length) { slideIndex = 1; }
+  if (n < 1) { slideIndex = slides.length; }
+  
   for (i = 0; i < slides.length; i++) {
     slides[i].style.display = "none";
   }
+  
   for (i = 0; i < dots.length; i++) {
     dots[i].className = dots[i].className.replace(" active", "");
   }
-  slides[slideIndex - 1].style.display = "block";
-  dots[slideIndex - 1].className += " active";
-}
-
-// Adicione esta função no final do seu app.js
-function setupSlidesCaptions() {
-  const slides = document.querySelectorAll('.mySlides');
   
-// Verifique se existem slides e notícias correspondentes
-  if (slides.length >= 3 && newsDatabase.length >= 3) {
-    // Primeiro slide - BYD
-    slides[0].querySelector('.text').innerHTML = `
-      <h3>${newsDatabase[5].title}</h3>
-      <p>${newsDatabase[5].excerpt}</p>
-    `;
-    
-    // Segundo slide - GP do Japão
-    slides[1].querySelector('.text').innerHTML = `
-      <h3>${newsDatabase[3].title}</h3>
-      <p>${newsDatabase[3].excerpt}</p>
-    `;
-    
-    // Terceiro slide - Studio Ghibli
-    slides[2].querySelector('.text').innerHTML = `
-      <h3>${newsDatabase[1].title}</h3>
-      <p>${newsDatabase[1].excerpt}</p>
-    `;
+  if (slides.length > 0) {
+    slides[slideIndex-1].style.display = "block";
+    dots[slideIndex-1].className += " active";
   }
 }
-
-document.addEventListener("DOMContentLoaded", function () {
-  if (window.location.pathname.includes("detalhes.html")) {
-    loadNewsDetails();
-  } else {
-    loadHomePage();
-    setupSlidesCaptions(); // Adiciona as captions aos slides
-  }
-  document.getElementById("current-year").textContent =
-    new Date().getFullYear();
-});
